@@ -61,35 +61,23 @@ static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "90x27", NULL };
 
-/*custom shortcuts*/
-static const char *browser[] = { "firefox", NULL };
-static const char *poweroff[]= { "poweroff", NULL };
-static const char *mute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
-static const char *volup[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
-static const char *voldown[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
-static const char *refbar[] = { "refbar.sh", NULL };
-static const char *emojis[] = { "emojis.sh", NULL };
-static const char *capture[] = { "capture.sh", NULL };
-static const char *awesome[] = { "fontawesome.sh", NULL };
-static const char *zathura[] = { "zathura", NULL };
-
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0, 							XF86XK_AudioMute, spawn, 		{.v = mute } },
-	{ 0, 							XF86XK_AudioMute, spawn, 		{.v = refbar } },
-	{ 0, 							XF86XK_AudioLowerVolume, spawn, {.v = voldown } },
-	{ 0, 							XF86XK_AudioLowerVolume, spawn, {.v = refbar } },
-	{ 0, 							XF86XK_AudioRaiseVolume, spawn, {.v = volup } },
-	{ 0, 							XF86XK_AudioRaiseVolume, spawn, {.v = refbar } },
-    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = poweroff } },
-    { MODKEY,             			XK_s,      spawn,          {.v = capture } },
-    { MODKEY,             			XK_a,      spawn,          {.v = awesome } },
+	{ 0, 							XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer -q set Master 5%+ unmute && refbar.sh") },
+	{ 0, 							XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -q set Master 6%- unmute && refbar.sh") },
+	{ 0, 							XF86XK_AudioMute,        spawn, SHCMD("amixer -q set Master toggle && refbar.sh") },
+    { 0,             				XF86XK_PowerOff,         spawn, SHCMD("poweroff") },
+    { 0,             				XF86XK_Calculator,       spawn, SHCMD("st -e bc -q") },
+    { 0,             				XF86XK_HomePage,         spawn, SHCMD("pcmanfm") },
+
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-    { MODKEY,                       XK_b,      spawn,          {.v = browser } },  
-    { MODKEY,                       XK_z,      spawn,          {.v = zathura } },  
-    { MODKEY,                       XK_e,      spawn,          {.v = emojis } },  
 	{ MODKEY,                       XK_w,  	   togglescratch,  {.v = scratchpadcmd } },
+    { MODKEY,                       XK_b,      spawn,          SHCMD("$BROWSER") },  
+    { MODKEY,                       XK_z,      spawn,          SHCMD("zathura") },  
+    { MODKEY,             			XK_s,      spawn,          SHCMD("scrot -q 100 -d $(echo -e '0\n2\n3\n5\n10' | dmenu) pix/screenshots/shot.png") },
+    { MODKEY,             			XK_a,      spawn,          SHCMD("cat ~/progs/scripts/.fontawesome | dmenu -l 15 -p 'awesome' | cut -d' ' -f1 |tr -d '\n' |xclip -selection clipboard") },
+    { MODKEY,                       XK_e,      spawn,          SHCMD("cat ~/progs/scripts/.emojis | dmenu -l 15 -p 'emoji'| cut -d' ' -f1 | tr -d '\n' | xclip -selection clipboard") },  
     { MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -134,7 +122,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {.v = &layouts[0]} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("st -e vim ~/progs/scripts/dwmbar.sh") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
