@@ -6,7 +6,7 @@ static const unsigned int gappx     = 16;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = {"Iosevka:style=Extended:pixelsize=15","Font Awesome 5 Free Solid:style=Solid:size=9", "Noto Color Emoji:style=Regular:size=9" };
+static const char *fonts[]          = {"JetBrains Mono:style=Regular :size=11","Font Awesome 5 Free Solid:style=Solid:size=9", "Noto Color Emoji:style=Regular:size=9" };
 static const char col_gray1[]       = "#2e333f";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#ffffff";
@@ -64,7 +64,7 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "90x27"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ 0, 							XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer -q set Master 5%+ unmute && refbar.sh") },
-	{ 0, 							XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -q set Master 6%- unmute && refbar.sh") },
+	{ 0, 							XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -q set Master 5%- unmute && refbar.sh") },
 	{ 0, 							XF86XK_AudioMute,        spawn, SHCMD("amixer -q set Master toggle && refbar.sh") },
     { 0,             				XF86XK_PowerOff,         spawn, SHCMD("poweroff") },
     { 0,             				XF86XK_Calculator,       spawn, SHCMD("st -e bc -q") },
