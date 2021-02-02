@@ -6,7 +6,7 @@ static const unsigned int gappx     = 16;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = {"Source Code Pro:style=Medium:size=11","Font Awesome 5 Free Solid:style=Solid:size=9", "Noto Color Emoji:style=Regular:size=9" };
+static const char *fonts[]          = {"Mono:size=11:autohint=true","Font Awesome 5 Free Solid:style=Solid:size=9", "Noto Color Emoji:style=Regular:size=9" };
 static const char col_gray1[]       = "#2e333f";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#ffffff";
