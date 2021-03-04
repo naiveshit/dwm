@@ -65,11 +65,10 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "90x27"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0, 							XF86XK_AudioRaiseVolume, spawn, SHCMD("amixer -q set Master 5%+ unmute && refbar.sh") },
-	{ 0, 							XF86XK_AudioLowerVolume, spawn, SHCMD("amixer -q set Master 5%- unmute && refbar.sh") },
-	{ 0, 							XF86XK_AudioMute,        spawn, SHCMD("amixer -q set Master toggle && refbar.sh") },
-    { 0,             				XF86XK_PowerOff,         spawn, SHCMD("poweroff") },
-    { 0,             				XF86XK_Calculator,       spawn, SHCMD("st -e bc -q") },
+	{ 0, 							XF86XK_AudioRaiseVolume, spawn, SHCMD("volume up") },
+	{ 0, 							XF86XK_AudioLowerVolume, spawn, SHCMD("volume down") },
+	{ 0, 							XF86XK_AudioMute,        spawn, SHCMD("volume toggle") },
+    { 0,             				XF86XK_Calculator,       spawn, SHCMD("$TERMINAL -e bc -q") },
     { 0,             				XF86XK_HomePage,         spawn, SHCMD("pcmanfm") },
 
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -80,6 +79,8 @@ static Key keys[] = {
     { MODKEY,             			XK_s,      spawn,          SHCMD("scrot -q 100 -d $(echo -e '0\n2\n3\n5\n10' | dmenu) pix/screenshots/shot.png") },
     { MODKEY,             			XK_a,      spawn,          SHCMD("cat ~/progs/scripts/.fontawesome | dmenu -l 15 -p 'awesome' | cut -d' ' -f1 |tr -d '\n' |xclip -selection clipboard") },
     { MODKEY,                       XK_e,      spawn,          SHCMD("cat ~/progs/scripts/.emojis | dmenu -l 15 -p 'emoji'| cut -d' ' -f1 | tr -d '\n' | xclip -selection clipboard") },  
+    { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("prompt 'Really shutdown?' 'poweroff'") },
+    { MODKEY,                       XK_o,      spawn,          SHCMD("openconfig") },  
     { MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
